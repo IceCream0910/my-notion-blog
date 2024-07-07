@@ -102,7 +102,13 @@ body {
 
   // 페이지 메인 이미지 (커버 이미지) 없을 때
   .notion-page-no-cover {
-    margin-top: 130px !important;
+    margin-top: -50px !important;
+  }
+
+  &.indexPage {
+    .notion-page-no-cover {
+      margin-top: 130px !important;
+    }
   }
 
   // 페이지 아이콘
@@ -305,10 +311,11 @@ body {
   &.childPage {
     .notion-page-icon-hero.notion-page-icon-image span,
     .notion-page-icon-hero.notion-page-icon-image img {
-      border-radius: 0;
+      display: none;
     }
 
     .notion-page-icon-hero.notion-page-icon-image {
+      display: none;
       box-shadow: none;
       border-radius: 0;
     }
@@ -425,12 +432,11 @@ body {
   // 인용
   .notion-quote {
     font-style: normal;
-    font-size: var(--base-font-size);
-    border-color: var(--primary-color);
-    padding: 1rem 1rem 1rem 2rem;
+    font-size: calc(var(--base-font-size) - 0.1em);
+    padding: 1rem 1rem 1rem 1rem;
     position: relative;
-    background-color: var(--fg-color-lighten);
     transition: 250ms background-color;
+    opacity: .8;
   }
 
   // 체크박스 (할일)
@@ -642,7 +648,7 @@ body {
         }
 
         .notion-collection-card-property:nth-child(2) {
-          height: 85px;
+          height: 55px;
 
           .notion-property-text {
             width: 100%;

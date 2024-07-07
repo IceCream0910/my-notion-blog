@@ -31,6 +31,10 @@ import { Page404 } from './Page404';
 import { PageAside } from './PageAside';
 import { PageHead } from './PageHead';
 import styles from './styles.module.css';
+import { useEffect } from 'react';
+import { useRef } from 'react';
+import { useState } from 'react';
+import { is } from 'date-fns/locale';
 
 // -----------------------------------------------------------------------------
 // dynamic imports for optional components
@@ -227,6 +231,169 @@ export const NotionPage: React.FC<types.PageProps> = ({
 
   const hasCollectionView = Object.keys(recordMap.collection_query).length;
 
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isLoadingTTS, setIsLoadingTTS] = useState(false);
+  const isPlayingRef = useRef(false);
+  const controllerRef = useRef<AbortController | null>(null);
+  const currentAudioRef = useRef<HTMLAudioElement | null>(null);
+  const nextAudioRef = useRef<HTMLAudioElement | null>(null);
+  const contentRef = useRef<string>('');
+
+  useEffect(() => {
+    isPlayingRef.current = isPlaying;
+  }, [isPlaying]);
+
+  useEffect(() => {
+  const text = (document.querySelector(".notion-page-content-inner") as HTMLElement)?.innerText;
+  const content = text
+    // 이미지 제거
+    .replace(/!\[([^\]]+?)\]\([^)]+?\)/g, '')
+    // 링크는 텍스트만 남기고 제거
+    .replace(/\[([^\]]+?)\]\([^)]+?\)/g, '$1')
+    // 코드 블록 제거
+    .replace(/```[^\n]+?\n([\s\S]+?)\n```/g, '')
+    // 불렛 제거
+    .replace(/- ([^\n]+?)\n/g, '$1\n')
+    // 특수문자 제거
+    .replace(/([*_`~#>])/g, '')
+    // '출처 : <링크>' 형태 제거
+    .replace(/출처\s*:\s*https?:\/\/[^\s]+/g, '')
+    // 좌우 공백 제거
+    .trim();
+
+  let cntWord = content?.split(" ").length || 0;
+  const readWPM = 200;
+  let readMinute = Math.trunc(cntWord / readWPM);
+  let readSecond = Math.round((cntWord / readWPM - readMinute) * 60 / 10) * 10;
+  if (readSecond === 60) { readSecond = 0; readMinute += 1; };
+
+  (window as any).toggleTTS = function () {
+    TTS();
+  };
+
+  setTimeout(() => {
+  const customHeader = document.querySelector('.notion-collection-page-properties .notion-collection-row');
+  if (customHeader) {
+    customHeader.innerHTML += `
+      <span class="notion-user-name"  style="opacity: .7; font-size: 14px;">🕒 읽는 데 ${readMinute}분 예상 &nbsp;<span style="opacity:.4; font-size: 9px">|</span>&nbsp;</div></span>
+      <span class="notion-property notion-property-date tts-btn" onClick="javascript:window.toggleTTS()" style="opacity: .7; cursor: pointer; font-size: 14px;">🔊&nbsp;&nbsp;음성으로 듣기</div></span>`;
+  }
+  }, 100);
+  }, []);
+
+  useEffect(() => {
+    const ttsButton = document.querySelector('.notion-property.notion-property-date.tts-btn');
+    if (ttsButton) {
+      ttsButton.innerHTML = isPlaying ? '🔊&nbsp;&nbsp;음성으로 듣기 정지' : '🔊&nbsp;&nbsp;음성으로 듣기';
+    }
+  }, [isPlaying]);
+
+  async function TTS(): Promise<void> {
+    if (isPlayingRef.current) {
+      controllerRef.current?.abort();
+      currentAudioRef.current?.pause();
+      nextAudioRef.current?.pause();
+      currentAudioRef.current = null;
+      nextAudioRef.current = null;
+      setIsPlaying(false);
+      isPlayingRef.current = false;
+      setIsLoadingTTS(false);
+      return;
+    }
+
+    setIsLoadingTTS(true);
+    setIsPlaying(true);
+
+    controllerRef.current = new AbortController();
+    const content = (document.querySelector(".notion-page-content-inner") as HTMLElement)?.innerText;
+    const text = content
+    // 이미지 제거
+    .replace(/!\[([^\]]+?)\]\([^)]+?\)/g, '')
+    // 링크는 텍스트만 남기고 제거
+    .replace(/\[([^\]]+?)\]\([^)]+?\)/g, '$1')
+    // 코드 블록 제거
+    .replace(/```[^\n]+?\n([\s\S]+?)\n```/g, '')
+    // 불렛 제거
+    .replace(/- ([^\n]+?)\n/g, '$1\n')
+    // 특수문자 제거
+    .replace(/([*_`~#>])/g, '')
+    // '출처 : <링크>' 형태 제거
+    .replace(/출처\s*:\s*https?:\/\/[^\s]+/g, '')
+    // 좌우 공백 제거
+    .trim();
+
+    const paragraphs = text.split("\n").filter(p => p && p.length > 1);
+
+    for (let i = 0; i < paragraphs.length; i++) {
+      try {
+        await playParagraph(paragraphs[i], i < paragraphs.length - 1 ? paragraphs[i + 1] : null, controllerRef.current.signal);
+      } catch (error: any) {
+        if (error.name === "AbortError") {
+          console.log("Fetch request has been aborted");
+          break;
+        } else {
+          console.error(error);
+        }
+      }
+    }
+
+    setIsPlaying(false);
+  }
+
+  async function playParagraph(currentText: string, nextText: string | null, signal: AbortSignal): Promise<void> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        if (!currentAudioRef.current) {
+          currentAudioRef.current = await createAudioElement(currentText, signal);
+        }
+
+        if (nextText && !nextAudioRef.current) {
+          nextAudioRef.current = await createAudioElement(nextText, signal);
+        }
+
+        setIsLoadingTTS(false);
+
+        currentAudioRef.current.onplay = () => setIsPlaying(true);
+        currentAudioRef.current.onended = () => {
+          if (nextAudioRef.current) {
+            currentAudioRef.current = nextAudioRef.current;
+            nextAudioRef.current = null;
+            currentAudioRef.current.play();
+          }
+          resolve();
+        };
+
+        await currentAudioRef.current.play();
+      } catch (error: any) {
+        reject(error);
+      }
+    });
+  }
+
+  async function createAudioElement(text: string, signal: AbortSignal): Promise<HTMLAudioElement> {
+    const options: Object = {
+      method: "POST",
+      headers: {
+        "xi-api-key": process.env.NEXT_PUBLIC_ELEVENLABS_API_KEY,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        text,
+        model_id: "eleven_multilingual_v2",
+        voice_settings: {
+          stability: 1,
+          similarity_boost: 1,
+        },
+      }),
+      signal,
+    };
+
+    const response = await fetch("https://api.elevenlabs.io/v1/text-to-speech/6WKnjxyhfi8k86ffrkFz/stream", options);
+    const audio = await response.blob();
+    const audioURL = URL.createObjectURL(audio);
+    return new Audio(audioURL);
+  }
+
   return (
     <>
       <PageHead
@@ -240,7 +407,7 @@ export const NotionPage: React.FC<types.PageProps> = ({
       {isLiteMode && <BodyClassName className="notion-lite" />}
 
       <NotionRenderer
-        className={cs(isIndexPage ? 'indexPage' : 'childPage', { hasCollectionView })}
+        className={cs(isBlogPost ? 'childPage' : 'indexPage', { hasCollectionView })}
         bodyClassName={cs(styles.notion, isIndexPage && 'index-page')}
         darkMode={isDarkMode}
         components={components}

@@ -589,7 +589,7 @@
 
 .notion-page-icon-hero.notion-page-icon-image .notion-page-icon {
   display: block;
-  border-radius: 3px;
+  border-radius: 50%;
   width: 100%;
   height: 100%;
   max-width: 100%;
@@ -663,7 +663,7 @@ svg.notion-page-icon {
   border-left: 3px solid currentcolor;
   padding: 0.2em 0.9em;
   margin: 6px 0;
-  font-size: 1.2em;
+  font-size: .8em;
 }
 
 .notion-hr {
@@ -1482,8 +1482,10 @@ svg.notion-page-icon {
   height: 100%;
   pointer-events: none;
   overflow: hidden;
-  background: var(--fg-color-5);
-  box-shadow: var(--fg-color-0) 0 -1px 0 0 inset;
+  background-color: #1f2027;
+  background: url('/api/social-image?id=');
+  background-size: cover;
+  background-repeat: no-repeat;
   padding: 8px 8px 0;
 }
 
@@ -2065,6 +2067,11 @@ svg.notion-page-icon {
 
 .notion-collection-row-property .notion-property {
   width: 100%;
+}
+
+.notion-collection-card-body .notion-property-date {
+  margin-top: 20px !important;
+  opacity: .8;
 }
 
 .notion-collection-row-property .notion-collection-column-title-icon {

@@ -21,7 +21,11 @@ module.exports = withBundleAnalyzer({
       },
       {
         protocol: 'https',
-        hostname: '**.twimg.com',
+        hostname: '**.githubusercontent.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'yuntae.in',
       },
       {
         protocol: 'https',
