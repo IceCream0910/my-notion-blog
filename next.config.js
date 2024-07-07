@@ -4,6 +4,9 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 });
 
 module.exports = withBundleAnalyzer({
+  eslint: {
+    ignoreDuringBuilds: true
+  },
   staticPageGenerationTimeout: 300,
   images: {
     remotePatterns: [

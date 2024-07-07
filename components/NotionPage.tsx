@@ -231,13 +231,12 @@ export const NotionPage: React.FC<types.PageProps> = ({
 
   const hasCollectionView = Object.keys(recordMap.collection_query).length;
 
-  const [isPlaying, setIsPlaying] = useState(false);
   const [isLoadingTTS, setIsLoadingTTS] = useState(false);
-  const isPlayingRef = useRef(false);
+  const [isPlaying, setIsPlaying] = useState(false);
   const controllerRef = useRef<AbortController | null>(null);
   const currentAudioRef = useRef<HTMLAudioElement | null>(null);
   const nextAudioRef = useRef<HTMLAudioElement | null>(null);
-  const contentRef = useRef<string>('');
+  const isPlayingRef = useRef<boolean>(false);
 
   useEffect(() => {
     isPlayingRef.current = isPlaying;
