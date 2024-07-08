@@ -7,6 +7,9 @@ module.exports = withBundleAnalyzer({
   eslint: {
     ignoreDuringBuilds: true
   },
+  experimental: {
+    scrollRestoration: true
+  },
   staticPageGenerationTimeout: 300,
   images: {
     remotePatterns: [
