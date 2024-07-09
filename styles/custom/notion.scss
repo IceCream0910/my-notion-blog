@@ -553,7 +553,11 @@ body {
       transition: 250ms transform, 250ms background-color;
 
       &:hover {
-        transform: translateY(-8px);
+        transform: scale(1.02)
+      }
+
+      &:active {
+        transform: scale(0.98)
       }
 
       @media (min-width: 1431px) {

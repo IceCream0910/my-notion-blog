@@ -53,11 +53,11 @@ export default siteConfig({
   navigationStyle: 'custom',
   navigationLinks: [
     {
-      title: '카테고리/태그',
+      title: '분류',
       pageId: '867a12c2f0fb420e9e16871a846cc5a9',
     },
     {
-      title: '카테고리/태그',
+      title: '분류',
       pageId: '867a12c2f0fb420e9e16871a846cc5a9',
       menuPage: true,
     },

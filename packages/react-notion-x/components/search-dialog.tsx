@@ -66,7 +66,7 @@ export class SearchDialog extends React.Component<{
 
                   <input
                     className="searchInput"
-                    placeholder="Search"
+                    placeholder="검색"
                     value={query}
                     ref={this._inputRef}
                     onChange={this._onChangeQuery}
@@ -105,13 +105,6 @@ export class SearchDialog extends React.Component<{
                           ))}
                         </div>
 
-                        <footer className="resultsFooter">
-                          <div>
-                            <span className="resultsCount">{searchResult.total}</span>
-
-                            {searchResult.total === 1 ? ' result' : ' results'}
-                          </div>
-                        </footer>
                       </NotionContextProvider>
                     ) : (
                       <div className="noResultsPane">

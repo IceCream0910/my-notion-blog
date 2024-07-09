@@ -120,6 +120,7 @@
 
 .notion > * {
   padding: 3px 0;
+  -webkit-tap-highlight-color : transparent;
 }
 
 .notion * {
@@ -2375,18 +2376,15 @@ svg.notion-page-icon {
 .notion-search {
   box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 5px 10px,
     rgba(15, 15, 15, 0.2) 0px 15px 40px;
-  border-radius: 3px;
+  border-radius: 15px;
   background: var(--bg-color);
-
   position: relative;
   top: 90px;
-  max-width: 600px;
   min-height: 50px;
   max-height: 80vh;
-  width: 75%;
+  width: 90%;
   overflow: hidden;
   outline: none;
-
   font-size: 16px;
   line-height: 1.5;
   color: rgb(55, 53, 47);
