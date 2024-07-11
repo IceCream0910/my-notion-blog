@@ -4,6 +4,10 @@ import { NotionPage } from 'components';
 import { domain } from 'lib/config';
 import { resolveNotionPage } from 'lib/resolve-notion-page';
 
+export const config = {
+  maxDuration: 60,
+};
+
 export const getStaticProps = async a => {
   try {
     const props = await resolveNotionPage(domain);
