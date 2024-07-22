@@ -103,7 +103,7 @@ export interface BaseBlock {
   space_id?: ID;
   parent_id: ID;
   parent_table: string | 'space' | 'block' | 'table';
-
+  permissions: { role: Role; type: string; user_id: string }[]
   version: number;
   created_time: number;
   last_edited_time: number;
@@ -158,7 +158,7 @@ export interface BasePageBlock extends BaseBlock {
     page_icon?: string;
     block_color?: Color;
   };
-  permissions: { role: Role; type: string }[];
+  permissions: { role: Role; type: string; user_id: string }[]
   file_ids?: string[];
 }
 

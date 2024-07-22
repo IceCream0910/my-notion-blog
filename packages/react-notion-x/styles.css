@@ -2792,7 +2792,14 @@ svg.notion-page-icon {
   animation-name: slideDownAndFade;
 }
 
-/* 글 목록 width가 모바일에서 overflow되는 issue 수정 */
-.notion-block-1a346171ed574b0a9c1c3f5a29b39919 {
+/* 일부 글 목록 페이지에서 width가 모바일에서 overflow되는 issue 수정 */
+.notion-block-1a346171ed574b0a9c1c3f5a29b39919,
+.notion-block-adcf3fd700f645c4b7b5f8be7bfc1f4e,
+.notion-block-e00ae9de7c8f4667a0327adf0d09d9a0,
+.notion-block-64de4d252eb14705b1c139a38beb9e2a,
+.notion-block-2a41835f61454d85aafa2ce35e79961c,
+.notion-block-1ba465b4c9ee4d62b0a02a6080d041fd,
+.notion-block-ea48627b0bf44a8f95cf8eec9aa0ce0f
+ {
   width: 100% !important;
 }
