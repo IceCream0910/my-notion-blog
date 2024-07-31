@@ -246,12 +246,14 @@ export class NotionAPI {
             return [];
           }
 
+          const url = `https://taein-workspace.notion.site/image/${encodeURIComponent(source)}?table=block&id=${block.id}&cache=v2`;
+
           return {
             permissionRecord: {
               table: 'block',
               id: block.id,
             },
-            url: source,
+            url: url,
           };
         }
       }

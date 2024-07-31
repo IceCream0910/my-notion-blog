@@ -1,23 +1,9 @@
-![github-repo-card-2skydev-blog](https://user-images.githubusercontent.com/43225384/192663396-f3d95224-a9c7-4f8b-81ba-e541b78000b7.png)
+Cloned from [GitHub - 2skydev/Notion-Next.js-blog-starter-kit](https://github.com/2skydev/Notion-Next.js-blog-starter-kit)
 
 # Notion + Next.js blog starter kit
 
 This repository is a startup kit that allows you to create a blog using `notion` and `next.js`.<br/>
 Please understand that the code and explanation are mainly written in Korean. 🥲
-
-<br />
-
-## 🔗 미리보기 및 링크
-
-아래 사진들은 운영중인 제 블로그에서 가져온 리소스입니다. [2skydev blog](https://blog.2skydev.com)
-
-### 라이트모드
-<img width="1792" alt="image" src="https://user-images.githubusercontent.com/43225384/202594029-e17f0231-88e3-4b22-8496-c75213337f6d.png">
-<img width="1747" alt="image" src="https://user-images.githubusercontent.com/43225384/197439019-14e34e5e-a918-4ee9-ba23-ed9e65ed5812.png">
-
-### 다크모드
-<img width="1792" alt="image" src="https://user-images.githubusercontent.com/43225384/202594126-d66efacb-8105-465c-a67d-86c3c522748d.png">
-<img width="1743" alt="image" src="https://user-images.githubusercontent.com/43225384/197439046-488f763b-af4e-4376-8dee-87b2b53a7606.png">
 
 <br />
 
@@ -36,10 +22,6 @@ Please understand that the code and explanation are mainly written in Korean. �
 
 노션의 내용을 기반으로 블로그가 생성되는 방식이니 실제로는 노션이 어떻게 구성되어있는지 궁금하신가요?<br/>
 아래 링크를 통해 이 블로그의 노션 구성을 확인하실 수 있습니다!
-
-**현재 운영중인 블로그 노션 페이지 (템플릿 복제 허용 X)**
-
-[2skydev blog 노션 링크](https://www.notion.so/2skydev-blog-d1e89e9e42eb4ebf9486ae0374039efc)
 
 <br/>
 
