@@ -46,7 +46,10 @@ export default siteConfig({
   //   '/foo': '067dd719a912471ea9a3ac10710e7fdf',
   //   '/bar': '0be6efce9daf42688f65c76b89f8eb27'
   // }
-  pageUrlOverrides: null,
+  pageUrlOverrides: {
+    '/forest': 'forest-515f927b635b4ef18d7988609314de2a'
+  },
+  includeNotionIdInUrls: true,
 
   // whether to use the default notion navigation style or a custom one with links to
   // important pages
@@ -57,8 +60,6 @@ export default siteConfig({
       pageId: 'Forest-515f927b635b4ef18d7988609314de2a',
     },
   ],
-
-  // -------- custom configs (2skydev) -------------
 
   // date-fns format string
   dateformat: 'yyyy년 MM월 dd일',
