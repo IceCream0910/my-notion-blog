@@ -243,3 +243,56 @@ body:not(.dark-mode) {
     }
   }
 }
+
+
+@media (max-width: 768px) {
+  .notion-comments {
+    .item {
+      .profileImage {
+        display: none;
+      }
+
+      .right {
+        .content {
+          padding: 0.75rem 1rem;
+          max-width: 100%;
+
+          &::after {
+            height: 30px;
+            width: 30px;
+            bottom: 2px;
+            left: -25px;
+          }
+
+          &::before {
+            height: 30px;
+            width: 30px;
+            bottom: 0;
+            left: -15px;
+          }
+        }
+
+        .profile {
+          margin-left: 1rem;
+        }
+      }
+    }
+
+    form {
+      .content {
+        textarea {
+          font-size: 0.9rem;
+        }
+
+        button {
+          width: 30px;
+          height: 30px;
+
+          svg {
+            width: 16px;
+          }
+        }
+      }
+    }
+  }
+}

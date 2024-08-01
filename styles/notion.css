@@ -49,10 +49,6 @@
 }
 
 @media (max-width: 1023px) {
-  .notion-nav-header-wide {
-    display: none !important;
-  }
-
   .notion-nav-header-mobile {
     display: inline-flex !important;
   }

@@ -710,3 +710,36 @@ body {
     }
   }
 }
+.notion-collection-view-dropdown-content {
+  background-color: var(--bg-color);
+  color: var(--fg-color);
+  fill: var(--fg-color);
+  border-radius: 20px;
+  box-shadow: 10px 10px 30px 0 rgba(0, 0, 0, 0.3);
+}
+
+.notion-collection-view-type .notion-collection-view-type-icon {
+  display:none;
+}
+
+// dropdown dark mode
+.notion-collection-view-dropdown-content-item {
+  background-color: var(--bg-color);
+  color: var(--fg-color);
+  fill: var(--fg-color);
+  border-radius: 10px;
+  padding: 7px 96px 7px 10px;
+
+  &:hover {
+    background-color: var(--bg-color-1);
+  }
+}
+.notion-collection-view-type {
+  .notion-collection-view-dropdown-icon {
+    fill: var(--fg-color);
+  }
+
+  .notion-collection-view-type-icon {
+    fill: var(--fg-color);
+  }
+}

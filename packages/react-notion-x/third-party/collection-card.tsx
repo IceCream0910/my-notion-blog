@@ -58,7 +58,17 @@ export const CollectionCard: React.FC<CollectionCardProps> = ({
     }
 
     if (!coverContent) {
-      coverContent = <div className='notion-collection-card-cover-empty' />
+      coverContent = (
+        <div className='notion-collection-card-cover-empty'>
+        <LazyImage
+          src={`https://blog.yuntae.in/api/social-image?id=${block.id}`}
+          alt={'notion image'}
+          style={{
+            objectFit: coverAspect
+          }}
+        />
+        </div>
+      )
     }
   } else if (cover?.type === 'page_cover') {
     const { page_cover } = block.format || {}

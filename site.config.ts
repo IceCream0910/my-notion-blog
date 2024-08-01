@@ -53,13 +53,8 @@ export default siteConfig({
   navigationStyle: 'custom',
   navigationLinks: [
     {
-      title: '분류',
-      pageId: '867a12c2f0fb420e9e16871a846cc5a9',
-    },
-    {
-      title: '분류',
-      pageId: '867a12c2f0fb420e9e16871a846cc5a9',
-      menuPage: true,
+      title: 'Forest',
+      pageId: 'Forest-515f927b635b4ef18d7988609314de2a',
     },
   ],
 
@@ -69,7 +64,7 @@ export default siteConfig({
   dateformat: 'yyyy년 MM월 dd일',
 
   // post page - hidden properties
-  hiddenPostProperties: ['설명', '상태', '최하위 정렬'],
+  hiddenPostProperties: ['설명', '상태', '최하위 정렬', 'forest_분류', 'forest_날짜'],
 
   // contentPosition (table of contents) text align
   contentPositionTextAlign: 'left',
