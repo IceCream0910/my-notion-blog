@@ -8,7 +8,8 @@ module.exports = withBundleAnalyzer({
     ignoreDuringBuilds: true
   },
   experimental: {
-    scrollRestoration: true
+    scrollRestoration: true,
+    esmExternals: false
   },
   staticPageGenerationTimeout: 300,
   images: {
