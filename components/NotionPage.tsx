@@ -381,7 +381,7 @@ export const NotionPage: React.FC<types.PageProps> = ({
       signal,
     };
 
-    const response = await fetch("https://api.elevenlabs.io/v1/text-to-speech/6WKnjxyhfi8k86ffrkFz/stream", options);
+    const response = await fetch("https://api.elevenlabs.io/v1/text-to-speech/s07IwTCOrCDCaETjUVjx/stream", options);
     const audio = await response.blob();
     const audioURL = URL.createObjectURL(audio);
     return new Audio(audioURL);
